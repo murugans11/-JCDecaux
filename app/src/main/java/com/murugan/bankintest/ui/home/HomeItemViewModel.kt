@@ -2,7 +2,8 @@ package com.murugan.bankintest.ui.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import com.murugan.bankintest.data.remote.response.Resource
+import androidx.lifecycle.map
+import com.murugan.bankintest.data.remote.response.BikeStandResponseItem
 import com.murugan.bankintest.ui.base.BaseItemViewModel
 
 import com.murugan.bankintest.utils.log.Logger
@@ -18,7 +19,11 @@ class HomeItemViewModel @Inject constructor(
     schedulerProvider: SchedulerProvider,
     compositeDisposable: CompositeDisposable,
     networkHelper: NetworkHelper
-) : BaseItemViewModel<Resource>(schedulerProvider, compositeDisposable, networkHelper) {
+) : BaseItemViewModel<BikeStandResponseItem>(
+    schedulerProvider,
+    compositeDisposable,
+    networkHelper
+) {
 
     companion object {
         const val TAG = "HomeItemViewModel"
@@ -26,9 +31,10 @@ class HomeItemViewModel @Inject constructor(
 
     val name: LiveData<String> = Transformations.map(data) { it.name }
 
-
     fun onItemClick(position: Int) {
-        messageString.postValue(com.murugan.bankintest.utils.common.Resource.success("Category at $position of ${data.value?.name} and parent ${data.value?.parent?.id}"))
+
+        messageString.postValue(com.murugan.bankintest.utils.common.Resource.success(" at ${position} $name"))
+
         Logger.d(TAG, "onItemClick at $position")
     }
 

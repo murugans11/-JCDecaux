@@ -3,6 +3,7 @@ package com.murugan.bankintest.ui.base
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.murugan.bankintest.R
+import com.murugan.bankintest.data.remote.response.BikeStandResponseItem
 import com.murugan.bankintest.utils.common.Resource
 import com.murugan.bankintest.utils.network.NetworkHelper
 import com.murugan.bankintest.utils.rx.SchedulerProvider
@@ -25,6 +26,7 @@ abstract class BaseViewModel(
 
     val messageStringId: MutableLiveData<Resource<Int>> = MutableLiveData()
     val messageString: MutableLiveData<Resource<String>> = MutableLiveData()
+    val detailData: MutableLiveData<BikeStandResponseItem> = MutableLiveData()
 
     protected fun checkInternetConnectionWithMessage(): Boolean =
         if (networkHelper.isNetworkConnected()) {

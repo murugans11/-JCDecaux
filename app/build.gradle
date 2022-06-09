@@ -23,7 +23,7 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField("String", "BASE_URL", "\"https://raw.githubusercontent.com/\"")
+            buildConfigField("String", "BASE_URL", "\"https://api.jcdecaux.com/\"")
         }
         release {
             minifyEnabled true // to apply the proguard

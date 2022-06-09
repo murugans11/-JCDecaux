@@ -2,7 +2,6 @@ package com.murugan.bankintest.ui.home
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.murugan.bankintest.R
 import com.murugan.bankintest.di.component.FragmentComponent
@@ -14,7 +13,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 
     companion object {
 
-        const val TAG = "DummiesFragment"
+        const val TAG = "HomeFragment"
 
         fun newInstance(): HomeFragment {
             val args = Bundle()
@@ -28,7 +27,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
     lateinit var linearLayoutManager: LinearLayoutManager
 
     @Inject
-    lateinit var dummiesAdapter: HomeAdapter
+    lateinit var bikeStandAdapter: HomeAdapter
 
     override fun provideLayoutId(): Int = R.layout.fragment_home
 
@@ -38,18 +37,22 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 
     override fun setupObservers() {
         super.setupObservers()
-        viewModel.getDummies().observe(this, Observer {
-            it?.run { dummiesAdapter.appendData(this) }
-        })
+        viewModel.getBikeStandList().observe(this) {
+            it?.run { bikeStandAdapter.appendData(this) }
+        }
 
-        viewModel.isDummiesFetching().observe(this, Observer {
+        viewModel.isFetching().observe(this) {
             pb_loading.visibility = if (it) View.VISIBLE else View.GONE
-        })
+        }
+
+        viewModel.messageString.observe(this) {
+            it.data?.run { showMessage(this) }
+        }
     }
 
     override fun setupView(view: View) {
-        rv_dummy.layoutManager = linearLayoutManager
-        rv_dummy.adapter = dummiesAdapter
+        rv_bikes.layoutManager = linearLayoutManager
+        rv_bikes.adapter = bikeStandAdapter
     }
 
 }

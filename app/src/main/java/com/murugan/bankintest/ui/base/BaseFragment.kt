@@ -42,13 +42,13 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
         inflater.inflate(provideLayoutId(), container, false)
 
     protected open fun setupObservers() {
-        viewModel.messageString.observe(this, Observer {
+        viewModel.messageString.observe(this) {
             it.data?.run { showMessage(this) }
-        })
+        }
 
-        viewModel.messageStringId.observe(this, Observer {
+        viewModel.messageStringId.observe(this) {
             it.data?.run { showMessage(this) }
-        })
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

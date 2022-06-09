@@ -4,7 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.murugan.bankintest.R
-import com.murugan.bankintest.data.remote.response.Resource
+import com.murugan.bankintest.data.remote.response.BikeStandResponseItem
 import com.murugan.bankintest.di.component.ViewHolderComponent
 
 import com.murugan.bankintest.ui.base.BaseItemViewHolder
@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.item_view_home.view.*
 
 
 class HomeItemViewHolder(parent: ViewGroup) :
-    BaseItemViewHolder<Resource, HomeItemViewModel>(R.layout.item_view_home, parent) {
+    BaseItemViewHolder<BikeStandResponseItem, HomeItemViewModel>(R.layout.item_view_home, parent) {
 
     override fun injectDependencies(viewHolderComponent: ViewHolderComponent) {
         viewHolderComponent.inject(this)
